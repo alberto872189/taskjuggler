@@ -5,7 +5,7 @@
  * some elements of it
  */
 
-project pSix "Web Game"  2025-04-03 +5m {
+project pSix "Web Game"  2024-12-15 +7m {
   # Set the default time zone for the project. If not specified, UTC
   # is used.
   timezone "Europe/Paris"
@@ -94,9 +94,9 @@ task WMGame "Web & Mobile Game" {
       effort 2d
       allocate boss
       depends WMGame.deliveries.start
-      journalentry 2025-04-03-03:00-+0200  "Start project" {
+      journalentry now "hoy" {
         author boss
-        summary "Project started :)"
+        summary "Fecha actual"
       }
   }
 
@@ -116,7 +116,7 @@ task WMGame "Web & Mobile Game" {
       actual:effort 11d
       allocate dev1, dev4
       depends WMGame.tback.tBEd
-      journalentry 2025-06-01 "Game logic completed before deadline" {
+      journalentry 2025-02-01 "Game logic completed before deadline" {
         author boss
         alert green
         summary "The team has ended the game logic before deadline."
@@ -138,7 +138,7 @@ task WMGame "Web & Mobile Game" {
       effort 9d
       actual:effort 15d
       allocate dev3
-      journalentry 2025-05-15 "Problems with the GUI design tool" {
+      journalentry 2025-01-15 "Problems with the GUI design tool" {
         author dev3
         alert yellow
         summary "The tool used for the GUI design has given me a lot of problems. I recommend to look for other one."
