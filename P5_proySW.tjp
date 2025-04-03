@@ -96,6 +96,7 @@ task WMGame "Web & Mobile Game" {
       depends WMGame.deliveries.start
       journalentry ${now} "hoy" {
         author boss
+        alert green
         summary "Fecha actual"
       }
   }
@@ -284,6 +285,11 @@ textreport frame "" {
       ----
       <[report id="status.future"]>
     ->8-
+  }
+
+  textreport "InitialPlanning" {
+    formats html
+    center '<[report id="initialPlanning"]>'
   }
 
   textreport development "Development" {
