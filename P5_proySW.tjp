@@ -94,7 +94,7 @@ task WMGame "Web & Mobile Game" {
       effort 2d
       allocate boss
       depends WMGame.deliveries.start
-      journalentry now "hoy" {
+      journalentry ${now} "hoy" {
         author boss
         summary "Fecha actual"
       }
