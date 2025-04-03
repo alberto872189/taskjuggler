@@ -5,7 +5,7 @@
  * some elements of it
  */
 
-project pSix "Web Game"  2024-12-15 +7m {
+project pSix "Web Game"  2025-04-03 +5m {
   # Set the default time zone for the project. If not specified, UTC
   # is used.
   timezone "Europe/Paris"
@@ -69,6 +69,11 @@ resource dev3 "Peter Green" {
   email "kkk@unizar.es"
 }
 
+resource dev4 "Alberto Latorre" {
+  email "872189@unizar.es"
+  limits { dailymax 4h }
+}
+
 # Now we specify the work packages. The whole project is described as
 # a task that contains subtasks. These subtasks are then broken down
 # into smaller tasks and so on. The innermost tasks describe the real
@@ -89,6 +94,10 @@ task WMGame "Web & Mobile Game" {
       effort 2d
       allocate boss
       depends WMGame.deliveries.start
+      journalentry 2025-04-03 "Start project" {
+        author boss
+        summary "Project started :)"
+      }
   }
 
   task tback "Back End" {
@@ -105,7 +114,7 @@ task WMGame "Web & Mobile Game" {
     task tlogic "Game logic" {
       effort 12d
       actual:effort 11d
-      allocate dev1, dev2
+      allocate dev1, dev4
       depends WMGame.tback.tBEd
       journalentry 2025-02-01 "Game logic completed before deadline" {
         author boss
@@ -137,7 +146,7 @@ task WMGame "Web & Mobile Game" {
     }
     task tFEc "Web Front End Construction" {
       effort 15d
-      allocate dev2, dev3
+      allocate dev2, dev4
       depends WMGame.twebF.tGUId
     }
     task tFEt "Web Front End Test" {
@@ -180,7 +189,7 @@ task WMGame "Web & Mobile Game" {
     }
     task tdep "Deployment on Selected Cloud" {
       effort 3d
-      allocate dev1
+      allocate dev4
       depends WMGame.tback.tbackDev, WMGame.tdepB.tevalC
     }
   }
@@ -353,6 +362,32 @@ taskreport status "" {
   taskreport future "" {
     headline "Future tasks"
     hidetask ~(actual.start > ${now})
+  }
+}
+
+taskreport initialPlanning "" {
+  columns bsi { width 50 title 'WBS' }, name { width 150 },
+          start { width 100 }, end { width 100 },
+          effort { width 100 },
+          alert { tooltip plan.journal
+                          != '' "<-query attribute='journal'->" width 150 },
+          status { width 150 }
+  scenarios plan
+
+  taskreport dashboard "" {
+    headline "Project Dashboard (<-query attribute='now'->)"
+    columns name { title "Task" ${AlertColor} width 200},
+            resources { width 200 ${AlertColor}
+                        listtype bullets
+                        listitem "<-query attribute='name'->"
+                        start ${projectstart} end ${projectend} },
+            alerttrend { title "Trend" ${AlertColor} width 50 },
+            journal { width 350 ${AlertColor} }
+    journalmode status_up
+    journalattributes headline, author, date, summary, details
+    hidetask ~hasalert(0)
+    sorttasks alert.down, actual.end.up
+    period %{${now} - 10w} +10w
   }
 }
 
