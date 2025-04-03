@@ -160,7 +160,7 @@ task WMGame "Web & Mobile Game" {
     task tFEc "Movile Front End Construction" {
       effort 13d
       allocate dev1, dev3
-      depneds WMGame.tmovF.tGUId
+      depends WMGame.tmovF.tGUId
     }
     task tFEt "Web Front End Test" {
       effort 6d
@@ -184,7 +184,7 @@ task WMGame "Web & Mobile Game" {
       depends WMGame.tback.tbackDev, WMGame.tdepB.tevalC
     }
   }
-  #dummy
+
   task ttest "Acceptance tests" {
       start no earlier than 2025-05-15
       effort 10d
