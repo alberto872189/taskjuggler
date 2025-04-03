@@ -196,15 +196,13 @@ task WMGame "Web & Mobile Game" {
   }
 
   task ttest "Acceptance tests" {
-      start 2025-05-15
-      start after WMGame.twebF
-      start after WMGame.tback
       effort 10d
       allocate boss
       allocate dev2
       actual:effort 20d
       depends WMGame.twebF
       depends WMGame.tback
+      start 2025-05-15
       }
 
     
