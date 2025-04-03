@@ -373,10 +373,18 @@ taskreport status "" {
 }
 
 taskreport initialPlanning "" {
-  columns bsi { width 50 title 'WBS' }, name { width 150 },
-          start { width 100 }, end { width 100 },
-          chart { ${TaskTip} scale day width 500 }
   scenarios plan
+  headline "Original Project Plan"
+  columns bsi { title 'WBS' },
+          name, start, end, effort, cost,
+          revenue, chart { ${TaskTip} }
+  # For this report we like to have the abbreviated weekday in front
+  # of the date. %a is the tag for this.
+  timeformat "%a %Y-%m-%d"
+  loadunit days
+  hideresource @all
+  balance cost rev
+  caption 'All effort values are in man days.'
 }
 
 # A list of tasks showing the resources assigned to each task.
