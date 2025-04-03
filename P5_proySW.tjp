@@ -94,7 +94,7 @@ task WMGame "Web & Mobile Game" {
       effort 2d
       allocate boss
       depends WMGame.deliveries.start
-      journalentry 2025-04-03 "Start project" {
+      journalentry 2025-04-03-03:00-+0200  "Start project" {
         author boss
         summary "Project started :)"
       }
