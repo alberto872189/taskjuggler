@@ -173,7 +173,7 @@ task WMGame "Web & Mobile Game" {
     purge chargeset
     chargeset back
     responsible dev1
-    depneds WMGame.tback.tBEd
+    depends WMGame.tback.tBEd
     task tevalC "Evaluation of Cloud Services" {
       effort 3d
       allocate dev2
