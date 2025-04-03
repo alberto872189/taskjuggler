@@ -374,22 +374,9 @@ taskreport status "" {
 
 taskreport initialPlanning "" {
   columns bsi { width 50 title 'WBS' }, name { width 150 },
-          start { width 100 }, end { width 100 }
+          start { width 100 }, end { width 100 },
+          chart { ${TaskTip} scale day width 500 }
   scenarios plan
-
-  taskreport dashboard "" {
-    headline "Project Dashboard (<-query attribute='now'->)"
-    columns name { title "Task" ${AlertColor} width 200},
-            resources { width 200 ${AlertColor}
-                        listtype bullets
-                        listitem "<-query attribute='name'->"
-                        start ${projectstart} end ${projectend} },
-            alerttrend { title "Trend" ${AlertColor} width 50 },
-            chart { ${TaskTip} scale day width 500 }
-    hidetask ~hasalert(0)
-    sorttasks plan.end.up
-    period %{${now} - 10w} +10w
-  }
 }
 
 # A list of tasks showing the resources assigned to each task.
