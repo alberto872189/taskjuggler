@@ -374,11 +374,7 @@ taskreport status "" {
 
 taskreport initialPlanning "" {
   columns bsi { width 50 title 'WBS' }, name { width 150 },
-          start { width 100 }, end { width 100 },
-          effort { width 100 },
-          alert { tooltip plan.journal
-                          != '' "<-query attribute='journal'->" width 150 },
-          status { width 150 }
+          start { width 100 }, end { width 100 }
   scenarios plan
 
   taskreport dashboard "" {
@@ -388,12 +384,9 @@ taskreport initialPlanning "" {
                         listtype bullets
                         listitem "<-query attribute='name'->"
                         start ${projectstart} end ${projectend} },
-            alerttrend { title "Trend" ${AlertColor} width 50 },
-            journal { width 350 ${AlertColor} }
-    journalmode status_up
-    journalattributes headline, author, date, summary, details
+            alerttrend { title "Trend" ${AlertColor} width 50 }
     hidetask ~hasalert(0)
-    sorttasks alert.down, actual.end.up
+    sorttasks plan.end.up
     period %{${now} - 10w} +10w
   }
 }
