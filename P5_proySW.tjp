@@ -384,7 +384,8 @@ taskreport initialPlanning "" {
                         listtype bullets
                         listitem "<-query attribute='name'->"
                         start ${projectstart} end ${projectend} },
-            alerttrend { title "Trend" ${AlertColor} width 50 }
+            alerttrend { title "Trend" ${AlertColor} width 50 },
+            chart { ${TaskTip} scale day width 500 }
     hidetask ~hasalert(0)
     sorttasks plan.end.up
     period %{${now} - 10w} +10w
